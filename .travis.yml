@@ -1,15 +1,19 @@
 language: python
 
+os:
+  - linux
+  - osx
+
 python:
   - "2.7"
   - "3.5"
   - "3.6"
 
-matrix:
-  include:
-    - python: "3.7"  # temp solution until travis supports python 3.7 more cleanly
-      dist: xenial
-      sudo: true
+#matrix:
+#  include:
+#    - python: "3.7"  # temp solution until travis supports python 3.7 more cleanly
+#      dist: xenial
+#      sudo: true
 
 install:
   - pip install choicemodels pytest
