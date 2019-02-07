@@ -5,14 +5,14 @@ os:
   - osx
 
 env:
-  matrix:
-    - PYTHON='2.7'
-    - PYTHON='3.5'
-    - PYTHON='3.6'
-    - PYTHON='3.7'
-  matrix:
-    - PACKAGE='pip'
-    - PACKAGE='conda'
+  - PYTHON='2.7' PKG='pip'
+  - PYTHON='2.7' PKG='conda'
+  - PYTHON='3.5' PKG='pip'
+  - PYTHON='3.5' PKG='conda'
+  - PYTHON='3.6' PKG='pip'
+  - PYTHON='3.6' PKG='conda'
+  - PYTHON='3.7' PKG='pip'
+  - PYTHON='3.7' PKG='conda'
 
 before_install:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then export OS="Linux"; fi
@@ -25,12 +25,12 @@ before_install:
 
 install:
   - |
-    if [ "$PACKAGE" == "pip" ]; then 
+    if [ "$PKG" == "pip" ]; then 
       pip install choicemodels pytest
       pip list
     fi
   - |
-    if [ "$PACKAGE" == "conda" ]; then 
+    if [ "$PKG" == "conda" ]; then 
       conda install choicemodels pytest --channel conda-forge
       conda list
     fi
