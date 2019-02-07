@@ -10,17 +10,9 @@ env:
     - PYTHON='3.5'
     - PYTHON='3.6'
     - PYTHON='3.7'
-
-#python:
-#  - "2.7"
-#  - "3.5"
-#  - "3.6"
-
-#matrix:
-#  include:
-#    - python: "3.7"  # temp solution until travis supports python 3.7 more cleanly
-#      dist: xenial
-#      sudo: true
+  matrix:
+    - PACKAGE='pip'
+    - PACKAGE='conda'
 
 before_install:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then export OS="Linux"; fi
@@ -32,8 +24,16 @@ before_install:
   - source activate test-env
 
 install:
-  - pip install choicemodels pytest
-  - pip list
+  - |
+    if [ "$PACKAGE" == "pip" ]; then 
+      pip install choicemodels pytest
+      pip list
+    fi
+  - |
+    if [ "$PACKAGE" == "conda" ]; then 
+      conda install choicemodels pytest --channel conda-forge
+      conda list
+    fi
 
 script:
   - pytest tests/*.py
