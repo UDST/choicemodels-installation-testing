@@ -1,19 +1,33 @@
-language: python
+language: generic
 
 os:
   - linux
   - osx
 
-python:
-  - "2.7"
-  - "3.5"
-  - "3.6"
+env:
+  matrix:
+    - PYTHON_VERSION='2.7'
+    - PYTHON_VERSION='3.5'
+    - PYTHON_VERSION='3.6'
+    - PYTHON_VERSION='3.7'
+
+#python:
+#  - "2.7"
+#  - "3.5"
+#  - "3.6"
 
 #matrix:
 #  include:
 #    - python: "3.7"  # temp solution until travis supports python 3.7 more cleanly
 #      dist: xenial
 #      sudo: true
+
+before_install:
+  - wget http://bit.ly/miniconda -O miniconda.sh
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - export PATH="$HOME/miniconda/bin:$PATH"
+  - conda create --name test-env python=$PYTHON_VERSION
+  - source activate test-env
 
 install:
   - pip install choicemodels pytest
