@@ -20,7 +20,7 @@ before_install:
   - wget https://repo.anaconda.com/miniconda/Miniconda3-latest-$OS-x86_64.sh -O miniconda.sh
   - bash miniconda.sh -b -p $HOME/miniconda
   - export PATH="$HOME/miniconda/bin:$PATH"
-  - conda create --yes --name test-env python=$PYTHON
+  - conda create --name test-env python=$PYTHON --yes
   - source activate test-env
 
 install:
@@ -31,7 +31,7 @@ install:
     fi
   - |
     if [ "$PKG" == "conda" ]; then 
-      conda install choicemodels pytest --channel conda-forge
+      conda install choicemodels pytest --channel conda-forge --yes
       conda list
     fi
 
