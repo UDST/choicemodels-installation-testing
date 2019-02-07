@@ -32,7 +32,7 @@ before_install:
   - source activate test-env
 
 install:
-  - pip install choicemodels pytest --channel conda-forge
+  - pip install choicemodels pytest
   - pip list
 
 script:
